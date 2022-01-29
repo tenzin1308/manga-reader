@@ -1,24 +1,18 @@
-import React from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
-import MangaList from '../components/home/MangaList'
-import Nav from '../components/home/Nav'
+import React from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import MangaList from '../components/home/MangaList';
+import Nav from '../components/home/Nav';
 
-const Home = () => {
+
+const Home = ({mangas, navigation}) => {
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView>
             <Nav />
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: "#121212"}}>
                 <View style={styles.mangaList}>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
-                    <MangaList image="https://image.mostraveller.com/uploads/images/comics/55/thumbnail.png" title= "One Piece"/>
+                    {mangas.map((manga, index) => {
+                        return (<MangaList image={manga.manga_image} title={manga.manga_name} description={manga.manga_description} key={index} navigation={navigation} />)
+                    })}
                 </View>
 
             </ScrollView>
