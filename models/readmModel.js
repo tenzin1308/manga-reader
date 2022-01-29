@@ -19,12 +19,7 @@ const readmModelSchema = new mongoose.Schema({
     },
     "manga_chapters": [
         {
-            "chapter_URL": [
-                {
-                    type: String,
-                    required: true
-                }
-            ]
+            
         }
     ]
 },
