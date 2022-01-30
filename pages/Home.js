@@ -11,7 +11,15 @@ const Home = ({mangas, navigation}) => {
             <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: "#121212"}}>
                 <View style={styles.mangaList}>
                     {mangas.map((manga, index) => {
-                        return (<MangaList image={manga.manga_image} title={manga.manga_name} description={manga.manga_description} key={index} navigation={navigation} />)
+                        return (
+                            <MangaList
+                                image={manga.manga_image}
+                                title={manga.manga_name}
+                                description={manga.manga_description}
+                                key={index}
+                                navigation={navigation} 
+                            />
+                        )
                     })}
                 </View>
 

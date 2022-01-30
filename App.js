@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
+import ChapterPage from "./pages/ChapterPage";
 import Home from "./pages/Home";
 import MangaDetail from "./pages/MangaDetail";
 
@@ -28,16 +29,19 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
-        screenOptions={({ route, navigation }) => ({
+        screenOptions={() => ({
           headerShown: false,
           gestureEnabled: true,
           ...TransitionPresets.SlideFromRightIOS,
         })}>
-        <Stack.Screen name="Home" options={{presentation: 'transparentModal'}}>
+        <Stack.Screen name="Home">
           {props => <Home {...props} mangas={mangas} />}
         </Stack.Screen>
-        <Stack.Screen name="Manga Detail" options={{title: 'Manga'}}>
+        <Stack.Screen name="Manga Detail">
           {props => <MangaDetail {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Read Manga">
+          {props => <ChapterPage {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

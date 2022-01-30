@@ -3,7 +3,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const MangaList = ({image, title, description, navigation}) => {
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('Manga Detail', { manga_description: description })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Manga Detail', {
+            manga_description: description,
+            title: title,
+            image: image,
+            navigation: navigation})}>
             <View style={styles.container}>
                 <Image
                     source={{ uri: image }} style={styles.image} />
