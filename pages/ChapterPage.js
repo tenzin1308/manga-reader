@@ -1,7 +1,20 @@
 import React from 'react';
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+// import { PinchGestureHandler } from 'react-native-gesture-handler';
+// import Animated from 'react-native-reanimated';
 
-const ChapterPage = ({route}) => {
+const width = Dimensions.get('window').width;
+
+const ChapterPage = ({ route }) => {
+
+    // const AnimatedImage = Animated.createAnimatedComponent(Image);
+    
+    // pinchHandler = useAnimatedGestureHandler<PinchGestureHandlerGestureEvent> ({
+    //     onActive: (event) => {
+    //         console.log(event);
+    //     },
+    // });
+
     return (
         <SafeAreaView>
             <View>
@@ -9,10 +22,11 @@ const ChapterPage = ({route}) => {
                     <Text style={styles.title}>{route.params.chapter_num}</Text>
                 </View>
                 <View style={styles.imageContainer}>
-                    <ScrollView>
+                    <ScrollView >
                         {route.params.chapter_image.map((image, index) => {
                             return (
-                                <Image source={{ uri: image }} style={{ width: "100%", height: 200 }} key={index} />
+                                <Image source={{ uri: image }} style={{ width: width, height: 300 }} key={index} />
+                                
                             )
                         })}
                     </ScrollView>

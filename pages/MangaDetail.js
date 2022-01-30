@@ -25,40 +25,49 @@ const MangaDetail = ({ route }) => {
 
   return (
     <SafeAreaView>
-      <View style={{ paddingLeft: 5 }}>
-        <Text style={styles.title}>{title}</Text>
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image source={{ uri: image }} style={styles.image} />
+      <ScrollView>
+        <View style={{ paddingLeft: 5 }}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.textContainer}>
-            <Text style={{fontWeight: 'bold'}}>Summary</Text>
-            <Text>{manga_description} </Text>
+          <View style={styles.container}>
+            <View style={styles.imageContainer}>
+              <Image source={{ uri: image }} style={styles.image} />
+            </View>
+            <View style={styles.textContainer}>
+              <Text style={{fontWeight: 'bold'}}>Summary</Text>
+              <Text>{manga_description} </Text>
+            </View>
           </View>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ fontWeight: 'bold', marginBottom:10, fontSize:20 }}>Chapter List</Text>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal={false} >
+              {chapter.map((item, index) => {
+                return (
+                  <TouchableOpacity
+                    key={index}
+                    style={{
+                      padding: 5,
+                    }}
+                    onPress={() => navigation.navigate('Chapter Page', { chapter_num: Object.keys(item),  chapter_image: item[Object.keys(item)] })} >
+                    <Text>{Object.keys(item)}</Text>
+                  </TouchableOpacity>
+                )
+              })}
+            </ScrollView>
+          </View>  
         </View>
-        <View style={{ marginTop: 5 }}>
-          <Text style={{ fontWeight: 'bold', marginBottom:10, fontSize:20 }}>Chapter List</Text>
-          <ScrollView showsHorizontalScrollIndicator={false} horizontal={false} >
-            {chapter.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  style={{
-                    padding: 5,
-                  }}
-                  onPress={() => navigation.navigate('Read Manga', { chapter_num: Object.keys(item),  chapter_image: item[Object.keys(item)] })} >
-                  <Text>{Object.keys(item)}</Text>
-                </TouchableOpacity>
-              )
-            })}
-          </ScrollView>
-        </View>  
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 10
+  },
   container: {
     flexDirection: 'row',
   },

@@ -40,7 +40,7 @@ export default function App() {
         <Stack.Screen name="Manga Detail">
           {props => <MangaDetail {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Read Manga">
+        <Stack.Screen name="Chapter Page">
           {props => <ChapterPage {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
