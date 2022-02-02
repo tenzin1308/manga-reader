@@ -1,19 +1,9 @@
 import React from 'react';
 import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
-// import { PinchGestureHandler } from 'react-native-gesture-handler';
-// import Animated from 'react-native-reanimated';
 
 const width = Dimensions.get('window').width;
 
 const ChapterPage = ({ route }) => {
-
-    // const AnimatedImage = Animated.createAnimatedComponent(Image);
-    
-    // pinchHandler = useAnimatedGestureHandler<PinchGestureHandlerGestureEvent> ({
-    //     onActive: (event) => {
-    //         console.log(event);
-    //     },
-    // });
 
     return (
         <SafeAreaView>
