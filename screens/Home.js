@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import BottomNav from '../components/home/BottomNav';
 import MangaList from '../components/home/MangaList';
 import Nav from '../components/home/Nav';
+import { Discovery, Download, Library, Setting } from '../fragments';
 
 
 const Home = ({mangas, navigation}) => {
