@@ -1,5 +1,6 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import BottomNav from '../components/home/BottomNav';
 import MangaList from '../components/home/MangaList';
 import Nav from '../components/home/Nav';
 
@@ -22,8 +23,8 @@ const Home = ({mangas, navigation}) => {
                         )
                     })}
                 </View>
-
             </ScrollView>
+            <BottomNav />
         </SafeAreaView>
     )
 }

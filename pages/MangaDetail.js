@@ -50,7 +50,7 @@ const MangaDetail = ({ route }) => {
                       padding: 5,
                     }}
                     onPress={() => navigation.navigate('Chapter Page', { chapter_num: Object.keys(item),  chapter_image: item[Object.keys(item)] })} >
-                    <Text>{Object.keys(item)}</Text>
+                    <Text style>{Object.keys(item)}</Text>
                   </TouchableOpacity>
                 )
               })}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginVertical: 5,
     fontWeight: 'bold'
-  },
+  }
 });
 
 
