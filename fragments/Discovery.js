@@ -1,10 +1,10 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { Text, View } from "react-native";
 
 const Discovery = () => {
   return (
     <View>
-      <Text></Text>
+      <Text>Discovery Page</Text>
     </View>
   );
 };
