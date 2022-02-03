@@ -28,6 +28,12 @@ const MangaDetail = ({ route }) => {
       <ScrollView>
         <View style={{ paddingLeft: 5 }}>
           <View style={styles.titleContainer}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image
+                source={{ uri: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/000000/external-back-key-navigation-button-on-computer-button-keyboard-color-tal-revivo.png" }}
+                style={{ width: 30, height: 30, marginRight: 5, marginTop: 7 }}
+              />
+            </TouchableOpacity>
             <Text style={styles.title}>{title}</Text>
           </View>
           <View style={styles.container}>
@@ -35,22 +41,33 @@ const MangaDetail = ({ route }) => {
               <Image source={{ uri: image }} style={styles.image} />
             </View>
             <View style={styles.textContainer}>
-              <Text style={{fontWeight: 'bold'}}>Summary</Text>
-              <Text>{manga_description} </Text>
+              <Text style={{ fontWeight: 'bold' }}>Summary</Text>
+              <ScrollView style={{ height: 100 }}>
+                <Text>{manga_description} </Text>
+              </ScrollView>
             </View>
           </View>
           <View style={{ marginTop: 5 }}>
             <Text style={{ fontWeight: 'bold', marginBottom:10, fontSize:20 }}>Chapter List</Text>
             <ScrollView showsHorizontalScrollIndicator={false} horizontal={false} >
-              {chapter.map((item, index) => {
+              {chapter.map((item, index, elements) => {
                 return (
                   <TouchableOpacity
                     key={index}
                     style={{
-                      padding: 5,
+                      padding: 1,
+                      margin: 1,
                     }}
-                    onPress={() => navigation.navigate('Chapter Page', { chapter_num: Object.keys(item),  chapter_image: item[Object.keys(item)] })} >
-                    <Text style>{Object.keys(item)}</Text>
+                    onPress={() => navigation.navigate('Chapter Page', {
+                      chapter_num: Object.keys(item),
+                      chapter_image: item[Object.keys(item)],
+                      navigation: navigation,
+                      prev_chapter_num: elements[index - 1] ? Object.keys(elements[index - 1]) : null,
+                      prev_chapter_image: elements[index - 1] ? elements[index - 1][Object.keys(elements[index - 1])] : null,
+                      next_chapter_num: elements[index + 1] ? Object.keys(elements[index + 1]) : null,
+                      next_chapter_image: elements[index + 1] ? elements[index + 1][Object.keys(elements[index + 1])] : null,
+                    })} >
+                    <Text style={styles.chapter_list}>{Object.keys(item)}</Text>
                   </TouchableOpacity>
                 )
               })}
@@ -64,12 +81,14 @@ const MangaDetail = ({ route }) => {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    justifyContent: 'center',
+    
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    flexDirection: 'row',
   },
   container: {
     flexDirection: 'row',
+    marginBottom: 10,
   },
   imageContainer: {
     width: '30%'
@@ -86,6 +105,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginVertical: 5,
     fontWeight: 'bold'
+  },
+  chapter_list: {
+    paddingTop: 0,
+    paddingRight: 25,
+    paddingBottom: 0,
+    paddingLeft: 25,
+    height: 50,
+    fontSize: 16,
+    lineHeight: 50,
+    borderRadius: 50,
+    backgroundColor: '#E3E3E3',
   }
 });
 

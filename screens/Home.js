@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-// import Nav from '../components/home/Nav';
+import { Image } from 'react-native';
 import { Discovery, Download, Library, Setting } from '../fragments';
 
 
@@ -11,7 +11,7 @@ const downloadScreen = 'Downloads';
 const libraryScreen = 'My Library';
 const settingScreen = 'Settings';
 
-const Home = ({mangas, navigation}) => {
+const Home = ({ navigation }) => {
     return (
         <NavigationContainer independent={true}>
             <Tab.Navigator
@@ -29,66 +29,57 @@ const Home = ({mangas, navigation}) => {
                         } else if (route.name === settingScreen) {
                             iconName = focused ? 'settings' : 'settings-outline';
                         }
-                        return console.log('some image ',Icons.iconName);
+                        return <Icons name={iconName} size={size} color={color}/>
                     },
+                    // tabBarOptions: {
+                    //     activeTintColor: 'tomato',
+                    //     inactiveTintColor: 'gray',
+                    //     labelStyle: { paddingBottom: 10, fontSize: 10 },
+                    //     style: { padding: 10, height: 100 },
+                    // },
+                    // swipeEnabled: true,
                 })}
-                screenOptions={{
-                    activeTintColor: 'tomato',
-                    inactiveTintColor: 'gray',
-                    labelStyle: { paddingBottom: 10, fontSize: 10 },
-                    style: { padding: 10, height: 70 }
-                }}
             >
-                <Tab.Screen name={discoverScreen} component={Discovery} />
-                <Tab.Screen name={libraryScreen} component={Library} />
-                <Tab.Screen name={downloadScreen} component={Download} />
-                <Tab.Screen name={settingScreen} component={Setting} />
+                <Tab.Screen name={discoverScreen}>
+                    {(props) => <Discovery {...props} navigation={navigation} />}
+                </Tab.Screen>
+                <Tab.Screen name={libraryScreen}>
+                    {(props) => <Library {...props} />}
+                </Tab.Screen>
+                <Tab.Screen name={downloadScreen}>
+                    {(props) => <Download {...props} />}
+                </Tab.Screen>
+                <Tab.Screen name={settingScreen} >
+                    {(props) => <Setting {...props} />}
+                </Tab.Screen>
             </Tab.Navigator>
         </NavigationContainer>
     )
 }
-
-const Icons = {
-    'search': "https://img.icons8.com/bubbles/100/000000/google-web-search.png",
-    'search-outline': "https://img.icons8.com/clouds/100/000000/google-web-search.png",
-    'download': "https://img.icons8.com/bubbles/100/000000/google-web-search.png",
-    'download-outline': "https://img.icons8.com/clouds/100/000000/google-web-search.png",
-    'book': "https://img.icons8.com/bubbles/100/000000/google-web-search.png",
-    'book-outline': "https://img.icons8.com/clouds/100/000000/google-web-search.png",
-    'settings': "https://img.icons8.com/bubbles/100/000000/google-web-search.png",
-    'settings-outline': "https://img.icons8.com/clouds/100/000000/google-web-search.png",
+function Icons ({ name }) {
+    if (name === 'search' || name === 'search-outline') {
+        return (
+            <Image source={{ uri: 'https://img.icons8.com/bubbles/50/000000/google-web-search.png' }}
+                style={{ width: 25, height: 25 }} />
+        )
+    } else if (name === 'download' || name === 'download-outline') {
+        return (
+            <Image source={{ uri: 'https://img.icons8.com/bubbles/100/000000/download.png' }}
+                style={{ width: 25, height: 25 }} />
+        )
+    } else if (name === 'book' || name === 'book-outline') {
+        return (
+            <Image source={{ uri: 'https://img.icons8.com/bubbles/100/000000/literature.png' }}
+                style={{ width: 25, height: 25 }} />
+        )
+    } else if (name === 'settings' || name === 'settings-outline') {
+        return (
+            <Image source={{ uri: 'https://img.icons8.com/external-bearicons-flat-bearicons/50/000000/external-setting-essential-collection-bearicons-flat-bearicons.png' }}
+                style={{ width: 25, height: 25 }} />
+        )
+    }
 }
-
-
-    // <img src="https://img.icons8.com/external-bearicons-flat-bearicons/50/000000/external-setting-essential-collection-bearicons-flat-bearicons.png" />
-    // <img src="https://img.icons8.com/bubbles/100/000000/literature.png"/>
-
-// const styles = StyleSheet.create({
-//     mangaList: {
-//         justifyContent: 'space-evenly',
-//         flexDirection: 'row',
-//         flexWrap: 'wrap'
-//     }
-// })
 
 export default Home
 
 
-        // <SafeAreaView>
-        //     <Nav />
-        //     <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: "#121212"}}>
-        //         <View style={styles.mangaList}>
-        //             {mangas.map((manga, index) => {
-        //                 return (
-        //                     <MangaList
-        //                         image={manga.manga_image}
-        //                         title={manga.manga_name}
-        //                         description={manga.manga_description}
-        //                         key={index}
-        //                         navigation={navigation} 
-        //                     />
-        //                 )
-        //             })}
-        //         </View>
-        //     </ScrollView>
-        // </SafeAreaView>
