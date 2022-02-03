@@ -59,13 +59,15 @@ const MangaDetail = ({ route }) => {
                       margin: 1,
                     }}
                     onPress={() => navigation.navigate('Chapter Page', {
-                      chapter_num: Object.keys(item),
-                      chapter_image: item[Object.keys(item)],
+                      chapter_num: elements[index] ? Object.keys(elements[index]) : null,
+                      chapter_image: elements[index] ? elements[index][Object.keys(elements[index])] : null,
                       navigation: navigation,
                       prev_chapter_num: elements[index - 1] ? Object.keys(elements[index - 1]) : null,
                       prev_chapter_image: elements[index - 1] ? elements[index - 1][Object.keys(elements[index - 1])] : null,
                       next_chapter_num: elements[index + 1] ? Object.keys(elements[index + 1]) : null,
                       next_chapter_image: elements[index + 1] ? elements[index + 1][Object.keys(elements[index + 1])] : null,
+                      chapters: elements,
+                      index: index,
                     })} >
                     <Text style={styles.chapter_list}>{Object.keys(item)}</Text>
                   </TouchableOpacity>
