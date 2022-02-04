@@ -6,9 +6,10 @@ const baseURL = 'https://manga-reader-server.herokuapp.com/api/manga/';
 
 const MangaDetail = ({ route }) => {
   
-  const { manga_description, title, image, navigation } = route.params;
+  const { manga_description, title, image, liked, setLiked, navigation } = route.params;
 
   const [chapter, setChapter] = useState([]);
+  const [like, setLike] = useState(liked);
   
   useEffect(() => {
     try {
@@ -23,18 +24,32 @@ const MangaDetail = ({ route }) => {
     }
   }, [])
 
+  const likeHandler = () => {
+    setLike(!like);
+    setLiked(!like);
+  }
+
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={{ paddingLeft: 5 }}>
-          <View style={styles.titleContainer}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image
-                source={{ uri: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/000000/external-back-key-navigation-button-on-computer-button-keyboard-color-tal-revivo.png" }}
-                style={{ width: 30, height: 30, marginRight: 5, marginTop: 7 }}
-              />
+          <View style={styles.navContainer}>
+            <View style={styles.titleContainer}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Image
+                  source={{ uri: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/000000/external-back-key-navigation-button-on-computer-button-keyboard-color-tal-revivo.png" }}
+                  style={{ width: 30, height: 30, marginRight: 5, marginTop: 7 }}
+                />
+              </TouchableOpacity>
+              <Text style={styles.title}>{title}</Text>
+            </View>
+            <TouchableOpacity onPress={() => likeHandler()}>
+              {!like ? 
+                <Image source={{ uri: "https://img.icons8.com/material-outlined/96/000000/like--v1.png" }} style={styles.likeImage} />
+                    :
+                <Image source={{ uri: "https://img.icons8.com/ios/96/FF0000/like-filled.png" }} style={styles.likeImage} />
+              }
             </TouchableOpacity>
-            <Text style={styles.title}>{title}</Text>
           </View>
           <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -83,7 +98,12 @@ const MangaDetail = ({ route }) => {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    
+    marginTop: 10,
+    marginBottom: 10,
+    flexDirection: 'row',
+  },
+  navContainer: {
+    justifyContent: 'space-between',
     marginTop: 10,
     marginBottom: 10,
     flexDirection: 'row',
@@ -94,6 +114,15 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: '30%'
+  },
+  likeImage: {
+    zIndex: 0,
+    right: 10,
+    top: 10,
+    width: 30,
+    height: 30,
+    padding: 5,
+    margin: 5,
   },
   textContainer: {
     width: '70%',
@@ -106,7 +135,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginVertical: 5,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   chapter_list: {
     paddingTop: 0,

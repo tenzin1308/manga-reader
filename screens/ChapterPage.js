@@ -27,7 +27,7 @@ const ChapterPage = ({ route }) => {
                         <ScrollView style={{paddingBottom: 100}} >
                             {route.params.chapter_image.map((image, index) => {
                                 return (
-                                    <Image source={{ uri: image }} style={{ width: width, height: 300 }} key={index} />
+                                    <Image source={{ uri: image }} style={{ width: width, height: 300, marginBottom: 10 }} key={index} />
                                 )
                             })}
                         </ScrollView>
@@ -76,9 +76,13 @@ const styles = StyleSheet.create({
     titleContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10,
         marginBottom: 10,
         flexDirection: 'row',
+        position: 'absolute',
+        zIndex: 50,
+        backgroundColor: '#fff',
+        width: width,
+        height: 50,
     },
     title: {
         fontSize: 24,
@@ -94,13 +98,10 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        // backgroundColor: 'rgba(52,52,52,0.8)',
         backgroundColor: '#fff',
-        bottom: 100,
-        marginBottom: 20,
-        paddingBottom: 20,
+        bottom: 0,
         width: width,
-        height: 100,
+        height: 70,
     },
     
 });
